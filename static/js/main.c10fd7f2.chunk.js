@@ -40,7 +40,7 @@
                                 package: o.a,
                                 options: {
                                     rpc: {
-                                        56: "https://bsc-dataseed.binance.org"
+                                        369: "https://rpc.pulsechain.com"
                                     }
                                 }
                             }
@@ -69,8 +69,93 @@
                     name: "logshh",
                     type: "event"
                 }, {
+                    anonymous: !1,
                     inputs: [],
-                    name: "USDTInterface",
+                    name: "LotteryStarted",
+                    type: "event"
+                }, {
+                    anonymous: !1,
+                    inputs: [{
+                        indexed: !0,
+                        internalType: "address",
+                        name: "buyer",
+                        type: "address"
+                    }, {
+                        indexed: !1,
+                        internalType: "uint256",
+                        name: "tier",
+                        type: "uint256"
+                    }, {
+                        indexed: !1,
+                        internalType: "uint256",
+                        name: "amount",
+                        type: "uint256"
+                    }],
+                    name: "TicketPurchased",
+                    type: "event"
+                }, {
+                    anonymous: !1,
+                    inputs: [{
+                        indexed: !0,
+                        internalType: "address",
+                        name: "winner",
+                        type: "address"
+                    }, {
+                        indexed: !1,
+                        internalType: "uint256",
+                        name: "tier",
+                        type: "uint256"
+                    }, {
+                        indexed: !1,
+                        internalType: "uint256",
+                        name: "amount",
+                        type: "uint256"
+                    }],
+                    name: "WinnerSelected",
+                    type: "event"
+                }, {
+                    anonymous: !1,
+                    inputs: [{
+                        indexed: !1,
+                        internalType: "uint256",
+                        name: "tier",
+                        type: "uint256"
+                    }, {
+                        indexed: !1,
+                        internalType: "uint256",
+                        name: "newPrice",
+                        type: "uint256"
+                    }],
+                    name: "TicketPriceUpdated",
+                    type: "event"
+                }, {
+                    anonymous: !1,
+                    inputs: [],
+                    name: "Paused",
+                    type: "event"
+                }, {
+                    anonymous: !1,
+                    inputs: [],
+                    name: "Unpaused",
+                    type: "event"
+                }, {
+                    anonymous: !1,
+                    inputs: [{
+                        indexed: !0,
+                        internalType: "address",
+                        name: "token",
+                        type: "address"
+                    }, {
+                        indexed: !1,
+                        internalType: "uint256",
+                        name: "amount",
+                        type: "uint256"
+                    }],
+                    name: "TokensRecovered",
+                    type: "event"
+                }, {
+                    inputs: [],
+                    name: "VoodooInterface",
                     outputs: [{
                         internalType: "contract IERC20",
                         name: "",
@@ -180,7 +265,7 @@
                     type: "function"
                 }, {
                     inputs: [],
-                    name: "initization",
+                    name: "initialization",
                     outputs: [{
                         internalType: "bool",
                         name: "",
@@ -229,6 +314,36 @@
                     stateMutability: "view",
                     type: "function"
                 }, {
+                    inputs: [],
+                    name: "pause",
+                    outputs: [],
+                    stateMutability: "nonpayable",
+                    type: "function"
+                }, {
+                    inputs: [],
+                    name: "paused",
+                    outputs: [{
+                        internalType: "bool",
+                        name: "",
+                        type: "bool"
+                    }],
+                    stateMutability: "view",
+                    type: "function"
+                }, {
+                    inputs: [{
+                        internalType: "address",
+                        name: "token",
+                        type: "address"
+                    }, {
+                        internalType: "uint256",
+                        name: "amount",
+                        type: "uint256"
+                    }],
+                    name: "recoverTokens",
+                    outputs: [],
+                    stateMutability: "nonpayable",
+                    type: "function"
+                }, {
                     inputs: [{
                         internalType: "uint256",
                         name: "_maxNumbers",
@@ -261,7 +376,7 @@
                 }, {
                     inputs: [{
                         internalType: "uint256",
-                        name: "_valueInEther",
+                        name: "_value",
                         type: "uint256"
                     }],
                     name: "setTicketPrice",
@@ -271,7 +386,7 @@
                 }, {
                     inputs: [{
                         internalType: "uint256",
-                        name: "_valueInEther",
+                        name: "_value",
                         type: "uint256"
                     }],
                     name: "setTicketPrice1",
@@ -281,7 +396,7 @@
                 }, {
                     inputs: [{
                         internalType: "uint256",
-                        name: "_valueInEther",
+                        name: "_value",
                         type: "uint256"
                     }],
                     name: "setTicketPrice2",
@@ -296,13 +411,19 @@
                     type: "function"
                 }, {
                     inputs: [],
-                    name: "tokenAdress",
+                    name: "tokenAddress",
                     outputs: [{
                         internalType: "address",
                         name: "",
                         type: "address"
                     }],
                     stateMutability: "view",
+                    type: "function"
+                }, {
+                    inputs: [],
+                    name: "unpause",
+                    outputs: [],
+                    stateMutability: "nonpayable",
                     type: "function"
                 }, {
                     inputs: [],
@@ -409,14 +530,9 @@
                 }];
 
             function O(e) {
-                return new e.eth.Contract(m, "0xc8c74e2c6a355d6a4760e6442fc74e6b698103d0")
+                return new e.eth.Contract(m, "0x341144c2E283D071a842CA1a03fBabd35A29688D")
             }
             var x = [{
-                inputs: [],
-                payable: !1,
-                stateMutability: "nonpayable",
-                type: "constructor"
-            }, {
                 anonymous: !1,
                 inputs: [{
                     indexed: !0,
@@ -441,21 +557,6 @@
                 inputs: [{
                     indexed: !0,
                     internalType: "address",
-                    name: "previousOwner",
-                    type: "address"
-                }, {
-                    indexed: !0,
-                    internalType: "address",
-                    name: "newOwner",
-                    type: "address"
-                }],
-                name: "OwnershipTransferred",
-                type: "event"
-            }, {
-                anonymous: !1,
-                inputs: [{
-                    indexed: !0,
-                    internalType: "address",
                     name: "from",
                     type: "address"
                 }, {
@@ -472,43 +573,6 @@
                 name: "Transfer",
                 type: "event"
             }, {
-                constant: !0,
-                inputs: [],
-                name: "_decimals",
-                outputs: [{
-                    internalType: "uint8",
-                    name: "",
-                    type: "uint8"
-                }],
-                payable: !1,
-                stateMutability: "view",
-                type: "function"
-            }, {
-                constant: !0,
-                inputs: [],
-                name: "_name",
-                outputs: [{
-                    internalType: "string",
-                    name: "",
-                    type: "string"
-                }],
-                payable: !1,
-                stateMutability: "view",
-                type: "function"
-            }, {
-                constant: !0,
-                inputs: [],
-                name: "_symbol",
-                outputs: [{
-                    internalType: "string",
-                    name: "",
-                    type: "string"
-                }],
-                payable: !1,
-                stateMutability: "view",
-                type: "function"
-            }, {
-                constant: !0,
                 inputs: [{
                     internalType: "address",
                     name: "owner",
@@ -524,11 +588,9 @@
                     name: "",
                     type: "uint256"
                 }],
-                payable: !1,
                 stateMutability: "view",
                 type: "function"
             }, {
-                constant: !1,
                 inputs: [{
                     internalType: "address",
                     name: "spender",
@@ -544,11 +606,9 @@
                     name: "",
                     type: "bool"
                 }],
-                payable: !1,
                 stateMutability: "nonpayable",
                 type: "function"
             }, {
-                constant: !0,
                 inputs: [{
                     internalType: "address",
                     name: "account",
@@ -560,27 +620,9 @@
                     name: "",
                     type: "uint256"
                 }],
-                payable: !1,
                 stateMutability: "view",
                 type: "function"
             }, {
-                constant: !1,
-                inputs: [{
-                    internalType: "uint256",
-                    name: "amount",
-                    type: "uint256"
-                }],
-                name: "burn",
-                outputs: [{
-                    internalType: "bool",
-                    name: "",
-                    type: "bool"
-                }],
-                payable: !1,
-                stateMutability: "nonpayable",
-                type: "function"
-            }, {
-                constant: !0,
                 inputs: [],
                 name: "decimals",
                 outputs: [{
@@ -588,79 +630,9 @@
                     name: "",
                     type: "uint8"
                 }],
-                payable: !1,
                 stateMutability: "view",
                 type: "function"
             }, {
-                constant: !1,
-                inputs: [{
-                    internalType: "address",
-                    name: "spender",
-                    type: "address"
-                }, {
-                    internalType: "uint256",
-                    name: "subtractedValue",
-                    type: "uint256"
-                }],
-                name: "decreaseAllowance",
-                outputs: [{
-                    internalType: "bool",
-                    name: "",
-                    type: "bool"
-                }],
-                payable: !1,
-                stateMutability: "nonpayable",
-                type: "function"
-            }, {
-                constant: !0,
-                inputs: [],
-                name: "getOwner",
-                outputs: [{
-                    internalType: "address",
-                    name: "",
-                    type: "address"
-                }],
-                payable: !1,
-                stateMutability: "view",
-                type: "function"
-            }, {
-                constant: !1,
-                inputs: [{
-                    internalType: "address",
-                    name: "spender",
-                    type: "address"
-                }, {
-                    internalType: "uint256",
-                    name: "addedValue",
-                    type: "uint256"
-                }],
-                name: "increaseAllowance",
-                outputs: [{
-                    internalType: "bool",
-                    name: "",
-                    type: "bool"
-                }],
-                payable: !1,
-                stateMutability: "nonpayable",
-                type: "function"
-            }, {
-                constant: !1,
-                inputs: [{
-                    internalType: "uint256",
-                    name: "amount",
-                    type: "uint256"
-                }],
-                name: "mint",
-                outputs: [{
-                    internalType: "bool",
-                    name: "",
-                    type: "bool"
-                }],
-                payable: !1,
-                stateMutability: "nonpayable",
-                type: "function"
-            }, {
-                constant: !0,
                 inputs: [],
                 name: "name",
                 outputs: [{
@@ -668,31 +640,9 @@
                     name: "",
                     type: "string"
                 }],
-                payable: !1,
                 stateMutability: "view",
                 type: "function"
             }, {
-                constant: !0,
-                inputs: [],
-                name: "owner",
-                outputs: [{
-                    internalType: "address",
-                    name: "",
-                    type: "address"
-                }],
-                payable: !1,
-                stateMutability: "view",
-                type: "function"
-            }, {
-                constant: !1,
-                inputs: [],
-                name: "renounceOwnership",
-                outputs: [],
-                payable: !1,
-                stateMutability: "nonpayable",
-                type: "function"
-            }, {
-                constant: !0,
                 inputs: [],
                 name: "symbol",
                 outputs: [{
@@ -700,11 +650,9 @@
                     name: "",
                     type: "string"
                 }],
-                payable: !1,
                 stateMutability: "view",
                 type: "function"
             }, {
-                constant: !0,
                 inputs: [],
                 name: "totalSupply",
                 outputs: [{
@@ -712,11 +660,9 @@
                     name: "",
                     type: "uint256"
                 }],
-                payable: !1,
                 stateMutability: "view",
                 type: "function"
             }, {
-                constant: !1,
                 inputs: [{
                     internalType: "address",
                     name: "recipient",
@@ -732,11 +678,9 @@
                     name: "",
                     type: "bool"
                 }],
-                payable: !1,
                 stateMutability: "nonpayable",
                 type: "function"
             }, {
-                constant: !1,
                 inputs: [{
                     internalType: "address",
                     name: "sender",
@@ -756,28 +700,15 @@
                     name: "",
                     type: "bool"
                 }],
-                payable: !1,
-                stateMutability: "nonpayable",
-                type: "function"
-            }, {
-                constant: !1,
-                inputs: [{
-                    internalType: "address",
-                    name: "newOwner",
-                    type: "address"
-                }],
-                name: "transferOwnership",
-                outputs: [],
-                payable: !1,
                 stateMutability: "nonpayable",
                 type: "function"
             }];
 
             function h(e) {
-                return new e.eth.Contract(x, "0x55d398326f99059fF775485246999027B3197955")
+                return new e.eth.Contract(x, "0x1c5f8e8E84AcC71650F7a627cfA5B24B80f44f00")
             }
-            var f = n.p + "static/media/logo.png",
-                v = n.p + " ",
+            var f = "https://example.com/voodoo-logo.png", // Replace with actual VDO logo URL
+                v = "https://example.com/voodoo-footer.png", // Replace with actual footer image URL
                 g = n(0),
                 w = b(),
                 T = function() {
@@ -870,7 +801,7 @@
                         Re = Object(u.a)(ze, 2),
                         Ye = Re[0],
                         Ge = Re[1],
-                        Ve = Object(a.useState)(0),
+                        Ve = Object(a.useState)(""),
                         He = Object(u.a)(Ve, 2),
                         Xe = He[0],
                         qe = He[1],
@@ -992,7 +923,7 @@
                                                 e.next = 10;
                                                 break
                                             }
-                                            return "0xc8c74e2c6a355d6a4760e6442fc74e6b698103d0", e.next = 4, o.methods.allowance(z, "0xc8c74e2c6a355d6a4760e6442fc74e6b698103d0").call();
+                                            return e.next = 4, o.methods.allowance(z, "0x341144c2E283D071a842CA1a03fBabd35A29688D").call();
                                         case 4:
                                             return t = e.sent, Ge(t), e.next = 8, o.methods.balanceOf(z).call();
                                         case 8:
@@ -1018,7 +949,7 @@
                                                 e.next = 10;
                                                 break
                                             }
-                                            return $e("Approving USDT"), "0xc8c74e2c6a355d6a4760e6442fc74e6b698103d0", "99999999999999999999999999999999999999999999999999", e.next = 7, o.methods.approve("0xc8c74e2c6a355d6a4760e6442fc74e6b698103d0", "99999999999999999999999999999999999999999999999999").send({
+                                            return $e("Approving VDO"), e.next = 7, o.methods.approve("0x341144c2E283D071a842CA1a03fBabd35A29688D", "99999999999999999999999999999999999999999999999999").send({
                                                 from: z
                                             });
                                         case 7:
@@ -1046,7 +977,7 @@
                                                 e.next = 9;
                                                 break
                                             }
-                                            return $e("Joining Silver Lottery"), a = y.utils.toWei("5"), e.next = 6, n.methods.joinLottery(a).send({
+                                            return $e("Joining Silver Lottery"), a = y.utils.toWei("10000"), e.next = 6, n.methods.joinLottery(a).send({
                                                 from: z
                                             });
                                         case 6:
@@ -1074,7 +1005,7 @@
                                                 e.next = 9;
                                                 break
                                             }
-                                            return $e("Joining Gold Lottery"), a = y.utils.toWei("10"), e.next = 6, n.methods.joinLottery1(a).send({
+                                            return $e("Joining Gold Lottery"), a = y.utils.toWei("20000"), e.next = 6, n.methods.joinLottery1(a).send({
                                                 from: z
                                             });
                                         case 6:
@@ -1102,7 +1033,7 @@
                                                 e.next = 9;
                                                 break
                                             }
-                                            return $e("Joining Diamond Lottery"), a = y.utils.toWei("50"), e.next = 6, n.methods.joinLottery2(a).send({
+                                            return $e("Joining Diamond Lottery"), a = y.utils.toWei("50000"), e.next = 6, n.methods.joinLottery2(a).send({
                                                 from: z
                                             });
                                         case 6:
@@ -1142,20 +1073,18 @@
                             style: {
                                 background: "black"
                             },
-                    
                             children: Object(g.jsxs)("div", {
                                 className: "container-fluid",
                                 children: [Object(g.jsx)("a", {
                                     className: "navbar-brand",
                                     href: "",
                                     children: Object(g.jsx)("img", {
-                                        src: "" ,
-                                        alt: "",
+                                        src: f,
+                                        alt: "Voodoo Lottery",
                                         className: "img-fluid",
                                         style: {
                                             width: "200px"
                                         }
-                            
                                     })
                                 }), Object(g.jsxs)("ul", {
                                     className: "navbar-nav me-auto",
@@ -1163,18 +1092,17 @@
                                         className: "nav-item",
                                         children: Object(g.jsx)("a", {
                                             className: "nav-link",
-                                            href: " ",
-                                            children: " "
+                                            href: "https://voodootoken.com",
+                                            children: "Home"
                                         })
                                     }), Object(g.jsx)("li", {
                                         className: "nav-item",
                                         children: Object(g.jsx)("a", {
                                             className: "nav-link",
-                                            href: " ",
-                                            children: " "
+                                            href: "https://pulsex.com",
+                                            children: "PulseX"
                                         })
                                     })]
-                                
                                 }), Object(g.jsxs)("button", {
                                     className: "btn btn-primary btn-lg btnd",
                                     style: {
@@ -1185,8 +1113,7 @@
                                     onClick: tt,
                                     children: [Object(g.jsx)("span", {
                                         className: "fas fa-wallet"
-                                    }), " ", V] 
-                                    
+                                    }), " ", V]
                                 })]
                             })
                         }), Object(g.jsx)("br", {}), Object(g.jsx)("div", {
@@ -1196,7 +1123,7 @@
                                 children: [Object(g.jsxs)("div", {
                                     className: "col-sm-9",
                                     children: [Object(g.jsx)("h1", {
-                                        children: "USDT Lottery"
+                                        children: "Voodoo Lottery"
                                     }), Object(g.jsx)("p", {
                                         children: "Instant Win, Instant Announcement, Immediate Transfer"
                                     })]
@@ -1205,11 +1132,11 @@
                                     children: [Object(g.jsx)("h1", {
                                         children: "Your Balance"
                                     }), Object(g.jsxs)("p", {
-                                        children: [Number(Xe).toFixed(2), " USDT"]
+                                        children: [Number(Xe).toFixed(2), " VDO"]
                                     })]
                                 })]
                             })
-                        }), Object(g.jsx)("br", {}), " ", Object(g.jsxs)("div", {
+                        }), Object(g.jsx)("br", {}), Object(g.jsxs)("div", {
                             className: "container",
                             children: ["" !== Ze ? Object(g.jsx)(g.Fragment, {
                                 children: Object(g.jsx)("center", {
@@ -1234,17 +1161,17 @@
                                         className: "card",
                                         children: [Object(g.jsxs)("div", {
                                             className: "card-body",
-                                            children: [" ", Object(g.jsxs)("center", {
-                                                children: [" ", Object(g.jsxs)("h4", {
-                                                    children: ["Winning Prize ", Object(g.jsx)("br", {}), " 50 USDT"]
+                                            children: [Object(g.jsxs)("center", {
+                                                children: [Object(g.jsxs)("h4", {
+                                                    children: ["Winning Prize ", Object(g.jsx)("br", {}), " 8000 VDO"]
                                                 }), Object(g.jsx)("p", {
                                                     style: {
                                                         fontSize: "8px"
                                                     },
-                                                    children: "30% Winner tax goes to Dev & Buyback Wallet"
+                                                    children: "20% Winner tax goes to Dev & Buyback Wallet"
                                                 })]
                                             })]
-                                        }), " "]
+                                        })]
                                     })
                                 }), Object(g.jsx)("div", {
                                     className: "col-sm-4",
@@ -1252,17 +1179,17 @@
                                         className: "card",
                                         children: [Object(g.jsxs)("div", {
                                             className: "card-body",
-                                            children: [" ", Object(g.jsxs)("center", {
-                                                children: [" ", Object(g.jsxs)("h4", {
-                                                    children: ["Winning Prize ", Object(g.jsx)("br", {}), " 100 USDT"]
+                                            children: [Object(g.jsxs)("center", {
+                                                children: [Object(g.jsxs)("h4", {
+                                                    children: ["Winning Prize ", Object(g.jsx)("br", {}), " 16000 VDO"]
                                                 }), Object(g.jsx)("p", {
                                                     style: {
                                                         fontSize: "8px"
                                                     },
-                                                    children: "30% Winner tax goes to Dev & Buyback Wallet"
+                                                    children: "20% Winner tax goes to Dev & Buyback Wallet"
                                                 })]
                                             })]
-                                        }), " "]
+                                        })]
                                     })
                                 }), Object(g.jsx)("div", {
                                     className: "col-sm-4",
@@ -1270,17 +1197,17 @@
                                         className: "card",
                                         children: [Object(g.jsxs)("div", {
                                             className: "card-body",
-                                            children: [" ", Object(g.jsxs)("center", {
-                                                children: [" ", Object(g.jsxs)("h4", {
-                                                    children: ["Winning Prize ", Object(g.jsx)("br", {}), " 200 USDT"]
+                                            children: [Object(g.jsxs)("center", {
+                                                children: [Object(g.jsxs)("h4", {
+                                                    children: ["Winning Prize ", Object(g.jsx)("br", {}), " 80000 VDO"]
                                                 }), Object(g.jsx)("p", {
                                                     style: {
                                                         fontSize: "8px"
                                                     },
-                                                    children: "30% Winner tax goes to Dev & Buyback Wallet"
+                                                    children: "20% Winner tax goes to Dev & Buyback Wallet"
                                                 })]
                                             })]
-                                        }), " "]
+                                        })]
                                     })
                                 })]
                             }), Object(g.jsx)("br", {}), Object(g.jsxs)("div", {
@@ -1304,7 +1231,7 @@
                                                             style: {
                                                                 textAlign: "right"
                                                             },
-                                                            children: [fe, " USDT"]
+                                                            children: [fe, " VDO"]
                                                         })]
                                                     }), Object(g.jsxs)("tr", {
                                                         children: [Object(g.jsx)("td", {
@@ -1358,7 +1285,7 @@
                                                         children: "Enable"
                                                     })
                                                 })
-                                            }), "  "]
+                                            })]
                                         })]
                                     })
                                 }), Object(g.jsx)("div", {
@@ -1380,7 +1307,7 @@
                                                             style: {
                                                                 textAlign: "right"
                                                             },
-                                                            children: [Te, " USDT"]
+                                                            children: [Te, " VDO"]
                                                         })]
                                                     }), Object(g.jsxs)("tr", {
                                                         children: [Object(g.jsx)("td", {
@@ -1456,7 +1383,7 @@
                                                             style: {
                                                                 textAlign: "right"
                                                             },
-                                                            children: [Se, " USDT"]
+                                                            children: [Se, " VDO"]
                                                         })]
                                                     }), Object(g.jsxs)("tr", {
                                                         children: [Object(g.jsx)("td", {
@@ -1519,10 +1446,10 @@
                             children: [Object(g.jsx)("h2", {
                                 children: " "
                             }), Object(g.jsx)("a", {
-                                href: " ",
+                                href: "https://voodootoken.com",
                                 children: Object(g.jsx)("img", {
                                     src: v,
-                                    alt: v,
+                                    alt: "Voodoo Lottery",
                                     className: " ",
                                     style: {
                                         width: "100px"
@@ -1530,13 +1457,13 @@
                                 })
                             })]
                         }), Object(g.jsx)("br", {}), Object(g.jsxs)("center", {
-                            children: [" ", Object(g.jsx)("h4", {
-                                children: "To check Winners Please Reffer To Lottery Smart Contract "
+                            children: [Object(g.jsx)("h4", {
+                                children: "To check Winners Please Refer To Lottery Smart Contract"
                             })]
                         }), Object(g.jsx)("br", {}), Object(g.jsx)("center", {
                             children: Object(g.jsxs)("h5", {
-                                children: [" ", Object(g.jsxs)("a", {
-                                    href: "https://twitter.com/USDT_",
+                                children: [Object(g.jsxs)("a", {
+                                    href: "https://x.com/Voodoo_Token",
                                     style: {
                                         color: "#ffc107",
                                         textDecoration: "none"
@@ -1545,7 +1472,7 @@
                                         class: "fa fa-twitter"
                                     }), " Twitter "]
                                 }), " || ", Object(g.jsxs)("a", {
-                                    href: "https://t.me/USDTofficialchat",
+                                    href: "https://t.me/Voodootokengroup",
                                     style: {
                                         color: "#ffc107",
                                         textDecoration: "none"
@@ -1553,9 +1480,8 @@
                                     children: [Object(g.jsx)("i", {
                                         class: "fa fa-telegram"
                                     }), " Telegram "]
-                                
-                                }), "|| ", Object(g.jsxs)("a", {
-                                    href: "https://bscscan.com/address/0x55d398326f99059fF775485246999027B3197955#code",
+                                }), " || ", Object(g.jsxs)("a", {
+                                    href: "https://scan.pulsechain.com/address/0x341144c2E283D071a842CA1a03fBabd35A29688D#code",
                                     style: {
                                         color: "#ffc107",
                                         textDecoration: "none"
@@ -1592,4 +1518,3 @@
         [737, 1, 2]
     ]
 ]);
-//# sourceMappingURL=main.c10fd7f2.chunk.js.map
